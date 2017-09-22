@@ -53,8 +53,8 @@ int main(int argc, char **argv)
     G_add_keyword(_("display"));
     G_add_keyword(_("graphics"));
     G_add_keyword(_("raster"));
-    module->description = _("Displays user-specified raster map in the active "
-			    "graphics frame.");
+    module->description = _("Displays user-specified raster maps in the active "
+                            "graphics frame.");
 
     /* set up command line */
     map = G_define_standard_option(G_OPT_R_MAPS);
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
     flag_i->guisection = _("Selection");
 
     if (G_parser(argc, argv))
-	exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
 
     name = map->answer;
     overlay = !flag_n->answer;
@@ -131,25 +131,25 @@ static int parse_catlist(char **catlist, Mask * mask)
 
     init_mask_rules(mask);
     if (catlist == NULL)
-	return 0;
+        return 0;
 
     for (; *catlist; catlist++) {
-	if (*catlist[0] == '/') {
-	    fd = fopen(*catlist, "r");
-	    if (fd == NULL) {
-		perror(*catlist);
-		G_usage();
-		exit(EXIT_FAILURE);
-	    }
-	    while (fgets(buf, sizeof buf, fd)) {
-		if (sscanf(buf, "%1s", x) != 1 || *x == '#')
-		    continue;
-		parse_mask_rule(buf, mask, *catlist);
-	    }
-	    fclose(fd);
-	}
-	else
-	    parse_mask_rule(*catlist, mask, (char *)NULL);
+        if (*catlist[0] == '/') {
+            fd = fopen(*catlist, "r");
+            if (fd == NULL) {
+            perror(*catlist);
+            G_usage();
+            exit(EXIT_FAILURE);
+            }
+            while (fgets(buf, sizeof buf, fd)) {
+            if (sscanf(buf, "%1s", x) != 1 || *x == '#')
+                continue;
+            parse_mask_rule(buf, mask, *catlist);
+            }
+            fclose(fd);
+        }
+        else
+            parse_mask_rule(*catlist, mask, (char *)NULL);
     }
 
     return 0;
@@ -163,25 +163,25 @@ static int parse_vallist(char **vallist, d_Mask * d_mask)
 
     init_d_mask_rules(d_mask);
     if (vallist == NULL)
-	return -1;
+        return -1;
 
     for (; *vallist; vallist++) {
-	if (*vallist[0] == '/') {
-	    fd = fopen(*vallist, "r");
-	    if (fd == NULL) {
-		perror(*vallist);
-		G_usage();
-		exit(EXIT_FAILURE);
-	    }
-	    while (fgets(buf, sizeof buf, fd)) {
-		if (sscanf(buf, "%1s", x) != 1 || *x == '#')
-		    continue;
-		parse_d_mask_rule(buf, d_mask, *vallist);
-	    }
-	    fclose(fd);
-	}
-	else
-	    parse_d_mask_rule(*vallist, d_mask, (char *)NULL);
+        if (*vallist[0] == '/') {
+            fd = fopen(*vallist, "r");
+            if (fd == NULL) {
+            perror(*vallist);
+            G_usage();
+            exit(EXIT_FAILURE);
+            }
+            while (fgets(buf, sizeof buf, fd)) {
+            if (sscanf(buf, "%1s", x) != 1 || *x == '#')
+                continue;
+            parse_d_mask_rule(buf, d_mask, *vallist);
+            }
+            fclose(fd);
+        }
+        else
+            parse_d_mask_rule(*vallist, d_mask, (char *)NULL);
     }
 
     return 0;
@@ -194,25 +194,25 @@ int parse_mask_rule(char *catlist, Mask * mask, char *where)
 
     /* #-# */
     if (sscanf(catlist, "%ld-%ld", &a, &b) == 2)
-	add_mask_rule(mask, a, b, 0);
+        add_mask_rule(mask, a, b, 0);
 
     /* inf-# */
     else if (sscanf(catlist, "%[^ -\t]-%ld", junk, &a) == 2)
-	add_mask_rule(mask, a, a, -1);
+        add_mask_rule(mask, a, a, -1);
 
     /* #-inf */
     else if (sscanf(catlist, "%ld-%[^ \t]", &a, junk) == 2)
-	add_mask_rule(mask, a, a, 1);
+        add_mask_rule(mask, a, a, 1);
 
     /* # */
     else if (sscanf(catlist, "%ld", &a) == 1)
-	add_mask_rule(mask, a, a, 0);
+        add_mask_rule(mask, a, a, 0);
 
     else {
-	if (where)
-	    fprintf(stderr, "%s: ", where);
-	G_usage();
-	G_fatal_error(_("[%s]: illegal category specified"), catlist);
+        if (where)
+            fprintf(stderr, "%s: ", where);
+        G_usage();
+        G_fatal_error(_("[%s]: illegal category specified"), catlist);
     }
 
     return 0;
@@ -225,25 +225,25 @@ int parse_d_mask_rule(char *vallist, d_Mask * d_mask, char *where)
 
     /* #-# */
     if (sscanf(vallist, "%lf-%lf", &a, &b) == 2)
-	add_d_mask_rule(d_mask, a, b, 0);
+        add_d_mask_rule(d_mask, a, b, 0);
 
     /* inf-# */
     else if (sscanf(vallist, "%[^ -\t]-%lf", junk, &a) == 2)
-	add_d_mask_rule(d_mask, a, a, -1);
+        add_d_mask_rule(d_mask, a, a, -1);
 
     /* #-inf */
     else if (sscanf(vallist, "%lf-%[^ \t]", &a, junk) == 2)
-	add_d_mask_rule(d_mask, a, a, 1);
+        add_d_mask_rule(d_mask, a, a, 1);
 
     /* # */
     else if (sscanf(vallist, "%lf", &a) == 1)
-	add_d_mask_rule(d_mask, a, a, 0);
+        add_d_mask_rule(d_mask, a, a, 0);
 
     else {
-	if (where)
-	    fprintf(stderr, "%s: ", where);
-	G_usage();
-	G_fatal_error(_("[%s]: illegal value specified"), vallist);
+        if (where)
+            fprintf(stderr, "%s: ", where);
+        G_usage();
+        G_fatal_error(_("[%s]: illegal value specified"), vallist);
     }
 
     return 0;

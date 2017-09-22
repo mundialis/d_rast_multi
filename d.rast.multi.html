@@ -1,30 +1,31 @@
 <h2>DESCRIPTION</h2>
 
-<em>d.rast</em> displays the specified raster map in the active
+<em>d.rast.multi</em> displays multiple raster maps in the active
 display frame on the graphics monitor.
 
 <h2>EXAMPLE</h2>
 
 Display raster map &quot;elevation&quot;:
 <div class="code"><pre>
-d.rast map=elevation
+d.rast.multi map=Landsat5_ndvi_1,Landsat5_ndvi_2
 </pre></div>
 
-Display raster map &quot;elevation&quot; but only values between 75 and 80:
+Display raster maps &quot;Landsat5_ndvi_1,Landsat5_ndvi_2&quot; but only values between 0 and 0.5:
 
 <div class="code"><pre>
-d.rast map=elevation values=75-80
+d.rast map=Landsat5_ndvi_1,Landsat5_ndvi_2 values=0-0.5
 </pre></div>
 
-Display raster map &quot;landuse96_28m&quot; but only categories 1 and 2:
+Display raster maps &quot;Landsat5_ndvi_1,Landsat5_ndvi_2&quot; but only categories 0.1 and 0.2:
 
 <div class="code"><pre>
-d.rast landuse96_28m values=1,2
+d.rast map=Landsat5_ndvi_1,Landsat5_ndvi_2 values=0.1,0.2
 </pre></div>
 
 <h2>SEE ALSO</h2>
 
 <em>
+  <a href="d.rast.html">d.rast</a>,
   <a href="d.rast.arrow.html">d.rast.arrow</a>,
   <a href="d.rast.num.html">d.rast.num</a>,
   <a href="d.rast.leg.html">d.rast.leg</a>,
